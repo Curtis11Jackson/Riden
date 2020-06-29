@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+	<section class="articles">
+
+
+		<div class="container">
+			<div class="row">
+				{% for article in articles %}
+					<div class="col-xl-4 col-lg-4 offset-lg-1 col-md-10 offset-md-1 col-sm-12 col-xs-12 art-sm">
+						<h2 style="text-align:center;">{{ article.title }}</h2>
+						<div class="metadata">{{ article.createdAt | date ('d/m/Y') }}
+							at
+							{{ article.createdAt | date('H:i') }}
+						</div>
+						<div class="content">
+							<img src="{{ article.image }}" class="img-fluid" alt="">
+							<br/>
+							{{ article.content | raw }}
+							<a href="{{ path('ride_show', {'id': article.id}) }}" class="btn btn-outline-primary d-flex justify-content-center" style="margin-bottom:1%; margin-top:2%;">Lire la suite</a>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+	</section>
+
+{% endblock %}

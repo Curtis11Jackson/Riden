@@ -1,0 +1,28 @@
+{% extends 'header.html.twig' %}
+
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1 style="text-align:center; margin-top:5%;">Create a new Article</h1>
+
+    {{ form_start(formArticle) }}
+
+    {{ form_row(formArticle.title, {'attr': {'placeholder': "Title"}}) }}
+
+    {{ form_row(formArticle.content,{'attr': {'placeholder': "Content"}}) }}
+
+    {{ form_row(formArticle.image,{'attr': {'placeholder': "Image"}}) }}
+
+    {% if editMode %}
+    
+        <button type="submit" class="btn btn-outline-warning" style="text-align:center;">Save changes</button>    
+    {% else %}
+        <button type="submit" class="btn btn-outline-success" style="text-align:center;">Add</button>        
+
+    {% endif %}
+
+    {{ form_end(formArticle) }}
+
+
+{% endblock %}

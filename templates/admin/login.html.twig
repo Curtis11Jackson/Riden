@@ -1,0 +1,21 @@
+{% extends 'header.html.twig' %}
+
+{% block body %}
+
+	<h1 style="color:white; text-align:center; margin-top:5vh;">Admin Login</h1>
+
+	<form action="{{ path('admin_login') }}" method="POST">
+		<div class="form-group">
+			<input type="text" class="form-control" name="_username" placeholder="Email" required>
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control" name="_password" placeholder="Password" required>
+		</div>
+		<div class="form-group">
+			<button class="btn btn btn-success" type="submit">Connect</button>
+            <div class="btn-container">
+	</div>
+		</div>
+	</form>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Ride{% endblock %}</title>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" media="(max-width: 1000px)" href="css/tablet.css">
+        <link rel="stylesheet" media="(max-width: 576px)" href="css/smartphone.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+        {% block stylesheets %}{% endblock %}
+    </head>
+
+    <body>
+    {% set page = app.request.get('_route') %}
+
+        <header>
+        <div class="menu-toggle" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="overlay"></div>
+        <div class="container">
+            <nav>
+                <h1 class="brand"><a href="/">Powered By Motivation</a></h1>
+                <ul>
+                    <li>
+                        <a href="/ride" class="Home">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Articles
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path("ride_create") }}" class="Create">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Create an Article
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="Services">                
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Merchandise
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="About">                
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            About
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="contact">                
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="bootstrap/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="js/script.js"></script>
+        {% block javascripts %}{% endblock %}
+</html>

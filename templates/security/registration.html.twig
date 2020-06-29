@@ -1,0 +1,27 @@
+{% extends 'header.html.twig' %}
+
+{% block body %}
+
+	<div class="form-container" style="margin-top:5vh; height:100vh;">
+
+		<h1 style="text-align:center;">Sign Up</h1>
+
+		{{ form_start(form)}}
+
+		{{ form_row(form.username, {'attr': {'placeholder': 'Please enter your username'}}) }}
+
+        {{ form_row(form.email,  {'attr': {'placeholder': 'Please enter your email'}}) }}
+
+        {{ form_row(form.password,  {'attr': {'placeholder': 'Please enter your password'}})}}
+
+        {{ form_row(form.confirm_password, {'attr': {'placeholder': 'Please confirm your password'}})}}
+
+		<div class="btn-container" style="margin:auto; width:5%; margin-top:1%;">
+			<button type="submit" class="btn btn-success" style="margin:auto;">Confirm</button>
+		</div>
+
+		{{ form_end(form)}}
+
+	</div>
+
+{% endblock %}

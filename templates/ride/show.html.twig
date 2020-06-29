@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Ride
+			{% endblock %}
+		</title>
+
+		<link rel="stylesheet" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/Base.css">
+		<link rel="stylesheet" media="(max-width: 1000px)" href="css/tablet.css">
+		<link rel="stylesheet" media="(max-width: 576px)" href="css/smartphone.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet"> {% block stylesheets %}{% endblock %}
+		</head>
+
+		<body>
+			{% set page = app.request.get('_route') %}
+
+			<header>
+				<div class="menu-toggle" id="hamburger">
+					<i class="fas fa-bars"></i>
+				</div>
+				<div class="overlay"></div>
+				<div class="container">
+					<nav>
+						<h1 class="brand">
+							<a href="/">Powered By Motivation</a>
+						</h1>
+						<ul>
+							<li>
+								<a href="../ride" class="Home">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>Articles</a>
+							</li>
+							<li>
+								<a href="#" class="Services">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>Merchandise</a>
+							</li>
+							<li>
+								<a href="#" class="About">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>About</a>
+							</li>
+							<li>
+								<a href="#" class="contact">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>Contact</a>
+							</li>
+							{% if not app.user %}
+
+								<li>
+									<a href="{{ path('security_login') }}" class="log">
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+										Log In
+									</a>
+								</li>
+
+							{% else %}
+
+								<li>
+									<a href="{{ path('security_logout') }}" class="log">
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+										Log Out
+									</a>
+								</li>
+							{% endif %}
+						</ul>
+					</nav>
+				</div>
+			</header>
+
+
+			<div class="wrapper">
+				{% block body %}
+
+					<section class="articles">
+
+						<div class="container">
+							<div class="row">
+
+								<div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1 col-md-10 offset-md-1 col-sm-12 col-12 art" style="margin-top:5vh;">
+									<h2>{{ article.title }}</h2>
+									<div class="metadata">
+										{{ article.createdAt | date ('d/m/Y') }}
+										at
+										{{ article.createdAt | date('H:i') }}
+									</div>
+									<div class="content">
+										<img src="{{ article.image }}" class="img-fluid" style="width:420px; height:260px;" alt="">
+										<br/>
+										{{ article.content | raw }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<section class="article-comments">
+						{% for comment in article.comments %}
+							<div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-10 offset-1 comment ">
+								<div class="row">
+									<div class="col-3">
+										{{ comment.author }}
+										(<small>{{ comment.createdAt | date('d/m/Y')}}
+											at
+											{{ comment.createdAt | date('h:i') }}</small>)
+									</div>
+									<div class="col">
+										{{ comment.content | raw }}
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+					</section>
+
+					
+						
+					<div class="col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-10 offset-1 comment ">
+					
+					{% if app.user %}
+						<h3 style="text-align:center; padding-top:1%;">Add a comment</h3>
+					
+						{{ form_start(commentForm) }}
+
+						{{ form_row(commentForm.author, {'attr': {'placeholder': "Your name"}}) }}
+
+						{{ form_row(commentForm.content, {'attr': {'placeholder': "Comment"}}) }}
+
+						<div class="btn-container" style="margin:auto; width:10%; margin-top:1%;">
+							<button type="submit" class="btn btn-success" style="margin:auto;">Add</button>
+						</div>
+
+						{{ form_end(commentForm)}}
+
+					{% else %}
+						<h3 style="text-align:center;">You must connect before commenting</h3>
+
+						<div class="btn-container" style="margin:auto; width:0%;">
+							<a href="{{ path('security_login') }}" class="btn btn-outline-primary">Login</a>
+						</div>
+						
+						<p>Don't yet have an account ?</p>
+
+						<div class="btn-container">
+							<a href="/inscription" class="btn btn-secondary">Sign Up</a>
+						</div>
+
+					{% endif %}
+					</div>
+				{% endblock %}
+			</div>
+
+
+			<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+			<script src="../js/script.js"></script>
+			{% block javascripts %}{% endblock %}
+		</body>
+	</html>
+</body></html>

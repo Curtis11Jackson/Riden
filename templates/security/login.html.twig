@@ -1,0 +1,29 @@
+{% extends 'header.html.twig' %}
+
+{% block body %}
+
+	<h1 style="color:white; text-align:center; margin-top:5vh;">Login</h1>
+
+	<form action="{{ path('security_login') }}" method="POST">
+		<div class="form-group">
+			<input type="text" class="form-control" name="_username" placeholder="Email" required>
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control" name="_password" placeholder="Password" required>
+		</div>
+		<div class="form-group">
+			<button class="btn btn btn-success" type="submit">Connect</button>
+            <div class="btn-container">
+
+        <p style="margin-top:3%;">Don't yet have an account ?</p>
+		<a href="/inscription" class="btn btn-secondary">Sign Up</a>
+	</div>
+		</div>
+	</form>
+
+	
+
+	
+
+
+{% endblock %}
